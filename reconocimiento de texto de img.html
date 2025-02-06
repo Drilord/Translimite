@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tesseract.js OCR Example</title>
+  <script src="https://unpkg.com/tesseract.js@v2.0.1/dist/tesseract.min.js"></script> 
+</head>
+<body>
+
+  <input type="file" id="imageInput">
+  <button onclick="recognizeText()">Recognize Text</button>
+  <div id="result"></div>
+
+  <script>
+    function recognizeText() {
+      const imageInput = document.getElementById('imageInput');
+      const file = imageInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const imgData = e.target.result;
+
+          Tesseract.recognize(imgData)
+            .then(({ data: { text } }) => {
+              document.getElementById('result').textContent = text;
+            })
+            .catch(err => {
+              console.error('Error recognizing text:', err);
+            });
+        };
+
+        reader.readAsDataURL(file); 
+      } else {
+        alert('Please select an image file.');
+      }
+    }
+  </script>
+
+</body>
+</html>
