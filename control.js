@@ -3,7 +3,7 @@ let a,b,c,d,e,f,g;
 document.addEventListener('DOMContentLoaded', () => {
 const discSel=document.getElementById('discLv');
 discSel.addEventListener('change',()=>{
-    if(discSel.value==='40'){
+    if(discSel.value>'3'){
         genpass();}
 
 });
